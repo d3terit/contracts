@@ -1,0 +1,26 @@
+<div class="p-4">
+  <div
+    *ngIf="matter"
+    class="min-w-[15rem] w-[15rem] h-52 max-w-[90%]  rounded-xl overflow-hidden shadow-xl "
+  >
+    <button
+    (click)="navigate()"
+    class="w-full p-3 h-2/3 text-center flex justify-center items-center border-b text-white border-white bg-gray-900 hover:bg-gray-800"
+    >
+
+        {{ matter.name }}
+    </button>
+    <div class="p-4 bg-gray-100 h-1/3 flex items-center justify-between">
+      <button (click)="copyLink()" class="py-1 px-2 hover:bg-gray-300 rounded-full">
+        <i class="pi pi-copy text-xl"></i>
+      </button>
+      <div>
+        <i class="pi pi-user text-lg text-blue-700"></i>
+        <span class="ml-2 text-lg">10 </span>
+      </div>
+      <button>
+        <i class="pi pi-ellipsis-v"></i>
+      </button>
+    </div>
+  </div>
+</div>

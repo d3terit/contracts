@@ -1,0 +1,41 @@
+<div class="bg-white h-full w-max">
+  <div class="sticky top-0 h-full px-6 py-8 flex flex-col justify-center">
+    <div class="py-16">
+      <a
+        routerLink="admin"
+        class="flex items-center rounded py-2.5 px-4 hover:bg-gray-200"
+        ><i class="pi pi-home mr-2" style="font-size: 1.2rem"></i> Inicio</a
+      >
+    </div>
+    <div class="flex flex-col space-y-2">
+      <a
+        [routerLink]="'edit/' + (id$ | async)"
+        routerLinkActive="bg-gray-200"
+        class="flex items-center rounded py-2.5 px-4 hover:bg-gray-200"
+        ><i class="pi pi-cog mr-2" style="font-size: 1.2rem"></i> Configurar</a
+      >
+      <a
+        [routerLink]="'shedules/' + (id$ | async)"
+        routerLinkActive="bg-gray-200"
+        class="flex items-center rounded py-2.5 px-4 hover:bg-gray-200"
+        ><i class="pi pi-calendar mr-2" style="font-size: 1.2rem"></i>
+        Horarios</a
+      >
+      <a
+        [routerLink]="'records/' + (id$ | async)"
+        routerLinkActive="bg-gray-200"
+        class="flex items-center rounded py-2.5 px-4 hover:bg-gray-200"
+        ><i class="pi pi-users mr-2" style="font-size: 1.2rem"></i> Registros</a
+      >
+    </div>
+    <div class="py-20">
+      <button
+        (click)="signOut()"
+        class="flex items-center rounded py-2.5 px-4 hover:text-white hover:bg-red-400"
+      >
+        <i class="pi pi-sign-out mr-2" style="font-size: 1.2rem"></i> Cerrar
+        sesión
+      </button>
+    </div>
+  </div>
+</div>

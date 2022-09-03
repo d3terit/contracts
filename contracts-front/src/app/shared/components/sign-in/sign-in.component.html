@@ -1,0 +1,87 @@
+<button (click)="show = true">Iniciar sesión</button>
+<div
+  class="fixed flex left-0 z-50 w-full h-screen bg-[rgba(88,95,101,.3)] top-0"
+  [ngClass]="!show ? 'translate-x-[100%] delay-150' : 'translate-x-[0%]'"
+>
+  <button
+    class="w-full h-full cursor-default"
+    [ngClass]="!show ? 'hidden' : ''"
+    (click)="show = false"
+  ></button>
+  <div
+    class="flex flex-col self-end h-full justify-center bg-white shadow-xl max-w-full min-w-[500px] ml-auto transition-all"
+    [ngClass]="!show ? 'translate-x-[100%]' : 'translate-x-[0]'"
+  >
+    <button
+      (click)="show = false"
+      class="absolute translate-x-[-100%] w-min pl-4 pr-2 py-3 bg-[rgba(255,255,255,0.7)] rounded-l-full text-2xl hover:bg-[rgba(255,255,255,0.9)]"
+    >
+      <span class="pi pi-times"></span>
+    </button>
+    <div class="min-h-screen overflow-auto px-8 pt-14">
+      <div class="flex flex-col justify-end">
+        <h2 class="text-center text-2xl text-slate-800 font-sans">
+          Inicia Sesión
+        </h2>
+
+        <div class="flex flex-col items-center my-10">
+          <form
+            class="flex flex-col space-y-5 min-w-[80%]"
+            [formGroup]="loginForm"
+            (ngSubmit)="loginWithEmail()"
+          >
+            <label for="email" class="bg-gray-100 p-2 px-4 rounded-md w-full">
+              <span class="text-sm block">Correo</span>
+              <input
+                name="email"
+                class="bg-transparent outline-none w-full"
+                type="email"
+                formControlName="email"
+                required
+                placeholder="Correo"
+              />
+            </label>
+            <label
+              for="password"
+              class="bg-gray-100 p-2 px-4 rounded-md w-full flex"
+            >
+              <div class="w-full">
+                <span class="text-sm block">Contraseña</span>
+                <input
+                  name="password"
+                  [type]="typeInput"
+                  class="bg-transparent outline-none w-full"
+                  formControlName="password"
+                  required
+                  placeholder="Contraseña"
+                />
+              </div>
+              <!-- <div *ngIf="myForm.controls['username'].invalid && (myForm.controls['username'].dirty || myForm.controls['username'].touched)" class="alert">
+              <div *ngIf="myForm.controls['username'].errors.required">
+              Please enter username
+            </div>
+          </div> -->
+              <button (click)="changeType($event)" class="focus:outline-none">
+                <i
+                  class="pi text-lg"
+                  [ngClass]="typeInput == 'password' ? 'pi-eye' : 'pi-eye-slash'"
+                ></i>
+              </button>
+            </label>
+            <div class="w-full flex justify-center py-2">
+              <button
+                class="bg-gray-200 py-2 px-5 w-fit rounded-md hover:bg-gray-100"
+              >
+                Iniciar sesión
+              </button>
+            </div>
+          </form>
+
+          <hr class="h-[2px] w-3/4 bg-slate-500 my-8" />
+          <app-oauth></app-oauth>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

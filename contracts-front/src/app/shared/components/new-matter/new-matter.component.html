@@ -1,0 +1,139 @@
+<button
+  class="px-4 py-3 flex items-center bg-gray-200 hover:bg-gray-100 rounded-lg"
+  (click)="show = true"
+>
+  <i class="pi pi-plus text-lg mr-3"></i>
+  Agregar materia
+</button>
+<div
+  class="fixed flex left-0 z-50 w-full h-screen bg-[rgba(88,95,101,.3)] top-0"
+  [ngClass]="!show ? 'translate-x-[100%] delay-150' : 'translate-x-[0%]'"
+>
+  <button
+    class="w-full h-full cursor-default"
+    [ngClass]="!show ? 'hidden' : ''"
+    (click)="show = false"
+  ></button>
+  <div
+    class="flex flex-col self-end h-full justify-center bg-white shadow-xl max-w-full min-w-[500px] ml-auto transition-all"
+    [ngClass]="!show ? 'translate-x-[100%]' : 'translate-x-[0]'"
+  >
+    <button
+      (click)="show = false"
+      class="absolute translate-x-[-100%] w-min pl-4 pr-2 py-3 bg-[rgba(255,255,255,0.7)] rounded-l-full text-2xl hover:bg-[rgba(255,255,255,0.9)]"
+    >
+      <span class="pi pi-times"></span>
+    </button>
+    <div class="min-h-screen overflow-auto px-8 pt-14">
+      <div class="flex flex-col justify-end">
+        <h2 class="text-center text-2xl text-slate-800 font-sans">
+          Agregar materia
+        </h2>
+
+        <div class="flex flex-col items-center my-10">
+          <form
+            class="flex flex-col space-y-5 min-w-[80%]"
+            [formGroup]="matterForm"
+            (ngSubmit)="addMatter()"
+          >
+            <label for="name" class="bg-gray-100 py-2 px-4 rounded-md w-full">
+              <span class="text-sm block">Nombre</span>
+              <input
+                name="name"
+                class="bg-transparent outline-none w-full"
+                type="name"
+                formControlName="name"
+                required
+                placeholder="Nombre"
+              />
+            </label>
+            <div
+              formArrayName="session"
+              class="bg-gray-100 py-2 px-4 rounded-md w-full"
+            >
+              <span class="text-sm block">Intensidad</span>
+              <div class="w-full">
+                <table class="w-full my-2">
+                  <tr *ngIf="getCtrl('session', matterForm).controls.length > 0">
+                    <th class="text-sm font-normal">Sesión</th>
+                    <th class="text-sm font-normal">Horas</th>
+                  </tr>
+                  <tr
+                    *ngFor="
+                      let day of getCtrl('session', matterForm).controls;
+                      index as formChild
+                    "
+                  >
+                    <th class="w-1/2">
+                      <span class="font-normal">{{ formChild + 1 }}</span>
+                    </th>
+                    <th class="w-1/2">
+                      <input
+                        class="w-full focus:outline-none font-normal text-center bg-transparent"
+                        [defaultValue]="day?.value"
+                        [formControl]="day"
+                        type="number"
+                        name="int"
+                        [max]="12"
+                        [min]="1"
+                        [id]="'num' + formChild + 1"
+                      />
+                    </th>
+                  </tr>
+                  <tr>
+                    <th class="w-1/2">
+                      <button
+                      type="button"
+                        class="w-full mt-3 hover:bg-gray-200 focus:outline-none"
+                        (click)="addDay()"
+                      >
+                        <i class="pi pi-plus"></i>
+                      </button>
+                    </th>
+                    <th class="w-1/2">
+                      <button
+                      type="button"
+                        class="w-full mt-3 hover:bg-gray-200 focus:outline-none"
+                        (click)="popDay()"
+                      >
+                        <i class="pi pi-minus"></i>
+                      </button>
+                    </th>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <label
+              for="email"
+              class="flex items-center justify-between bg-gray-100 p-4 rounded-md w-full"
+            >
+              <span>Oculto</span>
+              <button
+              type="button"
+                (click)="hidden = !hidden"
+                class="rounded-2xl flex items-center overflow-hidden border border-white h-6 p-1 transition-all"
+                [ngClass]="
+                  !hidden ? 'bg-gray-300 hover:bg-gray-400' : 'bg-cyan-500'
+                "
+              >
+                <span
+                  class="bg-white h-full px-2.5 rounded-lg transition-all"
+                  [ngClass]="!hidden ? 'mr-5' : 'ml-5'"
+                >
+                </span>
+              </button>
+            </label>
+            <div class="w-full flex justify-center py-2">
+              <button
+              type="submit"
+                class="bg-gray-200 py-2 px-5 w-fit rounded-md hover:bg-gray-100"
+              >
+                Crear materia
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
